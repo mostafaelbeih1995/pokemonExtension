@@ -1,0 +1,12 @@
+{
+    "name": "Pokemon Catcher",
+    "version": "1.0",
+    "manifest_version": 2,
+    "browser_action":{
+        "default_icon": "pokeBall.png",
+        "default_popup": "popup.html"
+    },
+    "background":{
+        "scripts": ["background.js"]
+    }
+}
