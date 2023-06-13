@@ -6,3 +6,15 @@ body {
 img {
     width: 80%;
 }
+
+.pokemon_image{
+    width: auto;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}

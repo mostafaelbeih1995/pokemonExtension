@@ -1,7 +1,8 @@
 
 let currentPokemon = {
     name: "charmander",
-    imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+    imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+    level: 0
 };
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
@@ -15,6 +16,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 function setAttributes(json){
     currentPokemon.name = json.forms[0].name
     currentPokemon.imageUrl = json.sprites.front_default
+    currentPokemon.level = Math.ceil(Math.random() * 100)
 };
 
 
