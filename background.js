@@ -1,7 +1,7 @@
 
 let currentPokemon = {
-    name: "",
-    imageUrl: ""
+    name: "charmander",
+    imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
 };
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
