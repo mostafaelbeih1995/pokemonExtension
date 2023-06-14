@@ -1,7 +1,6 @@
 # Pokemon Catcher
 
-![Alt text](pokeBall.png "Poke Ball")
-![Alt text](clickbait.PNG "Clickbait")
+![Alt text](clickbait.PNG "Overview")
 
 
 This is a browser extension where you can grab the pokemons! When you change your tab a wild pokemon will appear and you can catch with your pokeball! This Chrome extension was build with HTML, CSS and JS

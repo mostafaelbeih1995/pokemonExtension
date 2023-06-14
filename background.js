@@ -13,14 +13,16 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 });
 
 
+
+chrome.runtime.onMessage.addListener(sendPokeBall);
+
+
 function setAttributes(json){
     currentPokemon.name = json.forms[0].name
     currentPokemon.imageUrl = json.sprites.front_default
     currentPokemon.level = Math.ceil(Math.random() * 100)
 };
 
-
-chrome.runtime.onMessage.addListener(sendPokeBall);
 function sendPokeBall(request, sender, sendResponse){
     if(request.text === "REQUEST_POKEMON"){
         sendResponse(currentPokemon);
