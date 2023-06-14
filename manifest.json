@@ -2,9 +2,6 @@
     "name": "Pokemon Catcher",
     "version": "0.0.1",
     "description": "Pokemon game for educational purposes",
-    "icons":[
-        
-    ],
     "manifest_version": 3,
     "action":{
         "default_icon": "pokeBall.png",
