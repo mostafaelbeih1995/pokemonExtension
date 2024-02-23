@@ -1,8 +1,8 @@
 const title = document.querySelector('#pokemon_name')
 const image = document.querySelector('.pokemon_image')
-const button = document.querySelector('.catch')
+const catchBtn = document.querySelector('.catch')
 const level = document.querySelector('span')
-const myPokemon = document.querySelector('#pokeBall')
+const pokemonList = document.querySelector('#pokeBall')
 const myPokemonBtn = document.querySelector('#my_pokemon')
 
 
@@ -18,9 +18,9 @@ function rewritePokemonList(){
         let pokemonCollection = [];
     }else{
         let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection"));
-        for(let i= myPokemon.childNodes.length-1 ; i >=0; i--){
+        for(let i= pokemonList.childNodes.length-1 ; i >=0; i--){
             console.log("deleting child nodes..");
-            myPokemon.removeChild(myPokemon.childNodes[i]);
+            pokemonList.removeChild(pokemonList.childNodes[i]);
         }
         for(let i = 0; i < pokemonCollection.length; i++){
             console.log("rewriting child nodes..");
@@ -29,8 +29,8 @@ function rewritePokemonList(){
             h3Element.innerText = `${pokemonCollection[i].name}, lvl ${pokemonCollection[i].level}`;
             imgElement.src = pokemonCollection[i].imageUrl;
             imgElement.className = "pokemon_image";
-            myPokemon.appendChild(h3Element);
-            myPokemon.appendChild(imgElement);
+            pokemonList.appendChild(h3Element);
+            pokemonList.appendChild(imgElement);
         }
 
     }
@@ -38,11 +38,11 @@ function rewritePokemonList(){
 
 function displayMyPoke(){
 
-    myPokemon.classList.toggle('show');
+    pokemonList.classList.toggle('show');
 }
 
 function catchPokemon(response){
-    button.addEventListener('click', () => {
+    catchBtn.addEventListener('click', () => {
         let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
         const pokemon = {
             name: response.name,
