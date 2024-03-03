@@ -1,8 +1,8 @@
 
 let currentPokemon = {
-    name: "charmander",
-    imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-    level: 0
+    name: "rattata",
+    imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/19.png",
+    level: 1
 };
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){

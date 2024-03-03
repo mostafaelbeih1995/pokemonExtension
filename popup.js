@@ -23,14 +23,19 @@ function rewritePokemonList(){
             pokemonList.removeChild(pokemonList.childNodes[i]);
         }
         for(let i = 0; i < pokemonCollection.length; i++){
+            const newPokeItem = document.createElement("div");
+            newPokeItem.classList.add("pokeItem")
             console.log("rewriting child nodes..");
             const h3Element = document.createElement("h3");
             const imgElement = document.createElement("img");
+            newPokeItem.appendChild(h3Element);
+            newPokeItem.appendChild(imgElement);
             h3Element.innerText = `${pokemonCollection[i].name}, lvl ${pokemonCollection[i].level}`;
             imgElement.src = pokemonCollection[i].imageUrl;
             imgElement.className = "pokemon_image";
-            pokemonList.appendChild(h3Element);
-            pokemonList.appendChild(imgElement);
+            // pokemonList.appendChild(h3Element);
+            // pokemonList.appendChild(imgElement);
+            pokemonList.appendChild(newPokeItem);
         }
 
     }
