@@ -30,7 +30,8 @@ function rewritePokemonList(){
             const imgElement = document.createElement("img");
             newPokeItem.appendChild(h3Element);
             newPokeItem.appendChild(imgElement);
-            h3Element.innerText = `${pokemonCollection[i].name}, lvl ${pokemonCollection[i].level}`;
+            h3Element.innerText = `${pokemonCollection[i].name} 
+            lvl ${pokemonCollection[i].level}`;
             imgElement.src = pokemonCollection[i].imageUrl;
             imgElement.className = "pokemon_image";
             // pokemonList.appendChild(h3Element);
