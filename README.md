@@ -14,3 +14,11 @@ Open Google chrome and access `chrome://extensions/`
 Turn on the developer mode and choose the load unpacked option.
 
 Open the POKEMONEXTENSION folder and catch all Pokemons!
+
+## 🔍 Project Breakdown
+Your extension does the following:
+
+🧠 Picks a random Pokémon using the PokéAPI when a tab is updated.
+📬 Sends the Pokémon data to the popup via a Chrome message listener.
+🖼️ Displays the Pokémon in a popup.html with image, name, level, and "Catch!" button.
+📦 Saves caught Pokémon to localStorage and shows them on demand.
