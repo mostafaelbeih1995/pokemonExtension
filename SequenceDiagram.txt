@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant User
+    participant Chrome
+    participant Background.js
+    participant Storage
+    participant Popup.html/JS
+
+    User->>Chrome: Open new tab
+    Chrome->>Background.js: onUpdated (tab complete)
+    Background.js->>PokéAPI: Fetch random Pokémon
+    PokéAPI-->>Background.js: Return Pokémon data
+    Background.js->>Storage: Save currentPokemon
+
+    User->>Chrome: Click extension icon
+    Chrome->>Popup.html/JS: Load popup.html + popup.js
+    Popup.html/JS->>Storage: Get currentPokemon
+    Storage-->>Popup.html/JS: Return currentPokemon
+    Popup.html/JS->>Popup.html: Render image + name
+
+    User->>Popup.html/JS: Click \"Catch!\"
+    Popup.html/JS->>Storage: Get caughtPokemon array
+    Popup.html/JS->>Storage: Add new Pokémon to array
+    Popup.html/JS->>Storage: Save caughtPokemon
+    Popup.html/JS->>Popup.html: Update caught Pokémon list
