@@ -24,10 +24,29 @@ function rewritePokemonList(){
         }
         for(let i = 0; i < pokemonCollection.length; i++){
             const newPokeItem = document.createElement("div");
+            const deletePokemon = document.createElement("button");
+            deletePokemon.addEventListener('click', (e) => {
+                const nameToDelete = e.target.getAttribute("pokemon-name");
+                const levelToDelete = e.target.getAttribute("pokemon-level");
+            
+                let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
+            
+                // Filter out the clicked Pokémon
+                const updatedCollection = pokemonCollection.filter(p =>
+                    !(p.name === nameToDelete && p.level.toString() === levelToDelete)
+                );
+            
+                localStorage.setItem("pokemonCollection", JSON.stringify(updatedCollection));
+                rewritePokemonList(); // Re-render list
+            });
+            deletePokemon.textContent = "X";
             newPokeItem.classList.add("pokeItem")
+            newPokeItem.appendChild(deletePokemon);
             console.log("rewriting child nodes..");
             const h3Element = document.createElement("h3");
             const imgElement = document.createElement("img");
+            deletePokemon.setAttribute('pokemon-name', pokemonCollection[i].name)
+            deletePokemon.setAttribute('pokemon-level', pokemonCollection[i].level)
             newPokeItem.appendChild(h3Element);
             newPokeItem.appendChild(imgElement);
             h3Element.innerText = `${pokemonCollection[i].name} 
@@ -66,7 +85,7 @@ function showPokemon(response){
     console.log(response)
     let pokemons = localStorage.getItem("pokemonCollection");
     console.log(pokemons);
-    title.innerText = `A wild ${response.name} appeared`
+    title.innerText = `A wild ${response.name} appeared neek`
     image.src = response.imageUrl
     level.innerText = response.level
     catchPokemon(response)
