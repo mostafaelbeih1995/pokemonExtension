@@ -74,10 +74,16 @@ function catchPokemon(response){
             imageUrl: response.imageUrl,
             level: response.level
         }
-        pokemonCollection.push(pokemon);
-        localStorage.setItem('pokemonCollection', JSON.stringify(pokemonCollection));
-        rewritePokemonList();
-        title.innerText = `You caught a ${response.name}`
+        if(pokemonCollection.length < 6){
+            pokemonCollection.push(pokemon);
+            localStorage.setItem('pokemonCollection', JSON.stringify(pokemonCollection));
+            rewritePokemonList();
+            title.innerText = `You caught a ${response.name}`
+        } else{
+            console.log("Maximum team is 6 pokemons... chose wisel !!");
+            console.log(pokemonCollection.length);
+        }
+        
     })
 }
 function showPokemon(response){
