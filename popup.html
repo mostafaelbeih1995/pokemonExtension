@@ -6,6 +6,7 @@
     <title>Pokémon Battle</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./core/handlebars.js"></script>
 
     <style>
         body {
@@ -154,9 +155,47 @@
             background: #28a745;
             border-radius: 5px;
         }
+        .background-1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('./assets/battleback1-1.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 2;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .background-2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('./assets/battleback1-2.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .battle-container:hover .background-1 {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+
+        .battle-container:hover .background-2 {
+            transform: scale(1.05);
+            /* filter: brightness(1.1); */
+        }
     </style>
 </head>
 <body>
+    
+    <!-- Template for the profile -->
+   
     <div class="battle-container">
         <!-- Left Side Menu -->
         <div class="menu">
@@ -178,8 +217,10 @@
                 
             </ul>
         </div>
-        <img src="./assets/forest.webp" class="battle-background" alt="Battle Background" style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 0;">
-
+        <!-- <img src="./assets/forest.webp" class="battle-background" alt="Battle Background" style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 0;"> -->
+        <div class="background-1"></div>
+        <div class="background-2"></div>
+    
         <!-- Battle Screen -->
         <div class="battle-screen">
             <img src="./assets/logo.webp" class="pokemon-logo" alt="Pokémon Logo"/>
