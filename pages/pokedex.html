@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./pokedex.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .pokedex-container {
+            width: 400px;
+            height: 400px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: row;
+        }
+        .menu {
+            width: 60px;
+            background-color: #333;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            padding: 10px 0;
+            z-index: 100;
+
+        }
+        .menu button {
+            margin: 8px 0;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #ffcc00;
+            border: none;
+            font-size: 18px;
+            position: relative;
+            cursor: pointer;
+        }
+        /* Tooltips for Menu */
+        .menu button::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 120%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(10px);
+        }
+        .menu button:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        .pokedex-screen {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px;
+            overflow: hidden;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 6px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        .pokemon-list {
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: clip;
+            flex-grow: 1;
+        }
+        .pokemon-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.2s;
+            position: relative;
+        }
+        .pokemon-item:hover {
+            background-color: #ffcc00;
+            transform: scale(1.05);
+        }
+        .pokemon-item img {
+            width: 45px;
+            height: 45px;
+            margin-right: 10px;
+        }
+        /* Tooltips for Pokémon Items */
+        .pokemon-item::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 110%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(10px);
+        }
+        .pokemon-item:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        .pokemon-details {
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            border-top: 2px solid #ddd;
+            display: none;
+            background-color: #fff7e6;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="pokedex-container">
+    <!-- Left Side Menu -->
+    <div class="menu">
+        <a href="../popup.html">
+            <button data-tooltip="Back">🔙</button>
+        </a>
+        <button data-tooltip="Search">🔍</button>
+        <button data-tooltip="List">📋</button>
+    </div>
+
+    <!-- Pokédex Screen -->
+    <div class="pokedex-screen">
+        <input type="text" class="search-bar" id="searchInput" placeholder="Search Pokémon...">
+        
+        <!-- Pokémon List -->
+        <div class="pokemon-list" id="pokemonList">
+            <!-- Pokémon items will be injected here dynamically -->
+        </div>
+
+        <!-- Pokémon Details Panel -->
+        <div class="pokemon-details" id="pokemonDetails">
+            <button id="closeDetails" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px; cursor: pointer;">✖</button>
+            <h4 id="pokeName"></h4>
+            <img id="pokeImage" src="" alt="" width="100">
+            <p><strong>Type:</strong> <span id="pokeType"></span></p>
+            <p><strong>Height:</strong> <span id="pokeHeight"></span></p>
+            <p><strong>Weight:</strong> <span id="pokeWeight"></span></p>
+            <p><strong>Abilities:</strong> <span id="pokeAbilities"></span></p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

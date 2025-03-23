@@ -1,23 +1,196 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Pokemon Catcher</title>
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
-        <img src="https://i.kym-cdn.com/photos/images/original/001/024/523/1c7.jpg">
-        <div class="pokemonCaught">
-            <h2 id="pokemon_name"></h2>
-            <span></span><br>
-            <img class="pokemon_image" src="" alt=""><br>
-            <button class="catch" id="catch">Catch!</button>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon Battle</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+<style>
+      body {
+        background-color: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .battle-container {
+        width: 400px;
+        height: 400px;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: row;
+      }
+      .menu {
+            width: 60px;
+            background-color: #333;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            padding: 10px 0;
+            z-index: 100;
 
-            <button id="my_pokemon">My Pokemon</button>
+        }
+        .menu button {
+            margin: 8px 0;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #ffcc00;
+            border: none;
+            font-size: 18px;
+            position: relative;
+            cursor: pointer;
+        }
+        /* Tooltips for Menu */
+        .menu button::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 120%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(10px);
+        }
+        .menu button:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+      .battle-screen {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+      }
+      .pokemon-logo {
+        width: 150px;
+      }
+      .pokeball-container {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        padding: 10px;
+      }
+      .pokeball {
+        width: 40px;
+      }
+      .grow {
+        transition: all 0.3s ease;
+      }
+      .grow:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="battle-container">
+      <!-- Left Side Menu -->
+      <div class="menu">
+        <ul class="list-unstyled">
+          <li>
+            <button data-tooltip="Battle" class="grow">⚡</button>
+          </li>
+          <li>
+            <button data-tooltip="Bag" class="grow">🎒</button>
+          </li>
+          <li>
+            <button data-tooltip="Pokemon Quiz" class="grow">🧩</button>
+          </li>
+          <li>
+            <a href="./pages/pokedex.html">
+                <button data-tooltip="Pokemon Index " class="grow">📖</button>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Battle Screen -->
+      <div class="battle-screen">
+        <img
+          src="https://i.kym-cdn.com/photos/images/original/001/024/523/1c7.jpg"
+          class="pokemon-logo"
+          alt="Pokémon Logo"
+        />
+
+        <!-- Pokémon Battle Area (Placeholder) -->
+        <div
+          class="battle-area flex-grow-1 d-flex align-items-center justify-content-center"
+        >
+          <h5>Battle Scene</h5>
         </div>
-        <div id="pokeBall" class="hide">
-            <h3></h3>
-            <img class="pokemon_image">
-        </div>
-        <script src="popup.js"></script>
-    </body>
+
+        <!-- Pokéballs at the bottom -->
+        <ul
+          class="pokeball-container list-unstyled d-flex justify-content-evenly"
+        >
+          <li>
+            <button data-tooltip="Pikachu" class="grow">
+              <img
+            src="./assets/pokeball.png"
+            class="pokeball"
+            alt="Pokéball"
+              />
+            </button>
+          </li>
+          <li>
+            <button data-tooltip="Charmander" class="grow">
+              <img
+            src="./assets/pokeball.png"
+            class="pokeball"
+            alt="Pokéball"
+              />
+            </button>
+          </li>
+          <li>
+            <button data-tooltip="Bulbasaur" class="grow">
+              <img
+            src="./assets/pokeball.png"
+            class="pokeball"
+            alt="Pokéball"
+              />
+            </button>
+          </li>
+          <li>
+            <button data-tooltip="Squirtle" class="grow">
+              <img
+            src="./assets/pokeball.png"
+            class="pokeball"
+            alt="Pokéball"
+              />
+            </button>
+          </li>
+          <li>
+            <button data-tooltip="Eevee" class="grow">
+              <img
+            src="./assets/pokeball.png"
+            class="pokeball"
+            alt="Pokéball"
+              />
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
 </html>
+<script>
+    console.log('makeing the tooltips')
+  const tooltipTriggerList = document.querySelectorAll(
+    '[data-bs-toggle="tooltip"]'
+  );
+  const tooltipList = [...tooltipTriggerList].map(
+    (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+  );
+</script>
