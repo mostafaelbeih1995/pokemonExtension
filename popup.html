@@ -1,23 +1,222 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Pokemon Catcher</title>
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
-        <img src="https://i.kym-cdn.com/photos/images/original/001/024/523/1c7.jpg">
-        <div class="pokemonCaught">
-            <h2 id="pokemon_name"></h2>
-            <span></span><br>
-            <img class="pokemon_image" src="" alt=""><br>
-            <button class="catch" id="catch">Catch!</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Battle</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-            <button id="my_pokemon">My Pokemon</button>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .battle-container {
+            width: 400px;
+            height: 400px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: row;
+            position: relative;
+        }
+        .menu {
+            width: 60px;
+            background-color: #f8f9fa00;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            padding: 10px 0;
+            z-index: 100;
+        }
+        .menu button {
+            margin: 8px 0;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #ffcc00;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+        .menu button:hover {
+            transform: scale(1.1);
+        }
+        .menu button::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 120%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateX(10px);
+        }
+        .menu button:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        .battle-screen {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .pokemon-logo {
+            width: 210px;
+            z-index: 2;
+        }
+        .battle-area {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            color: #f8f9fa;
+        }
+        .pokeball-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+        }
+        .pokeball-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .pokeball-list {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            background-color:#f8f9fa40;
+            border-radius: 20px;
+            border: 0.5px solid #28a745;
+            padding: 5px;
+            z-index: 2;
+        }
+        .pokeball {
+            width: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .pokeball:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+        /* Pokémon Info Box */
+        .pokemon-info {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border: 2px solid #333;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            border-radius: 5px;
+            z-index: 3;
+        }
+        .pokemon-info img {
+            width: 80px;
+            height: 80px;
+        }
+        .health-bar {
+            height: 8px;
+            width: 100%;
+            background: #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+            position: relative;
+        }
+        .health-fill {
+            height: 100%;
+            background: #28a745;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="battle-container">
+        <!-- Left Side Menu -->
+        <div class="menu">
+            <ul class="list-unstyled">
+                <li class="menu-button">
+                  <button data-tooltip="Battle" class="grow">⚡</button>
+                </li>
+                <li>
+                  <button data-tooltip="Bag" class="grow">🎒</button>
+                </li>
+                <li>
+                  <button data-tooltip="Pokemon Quiz" class="grow">🧩</button>
+                </li>
+                <li>
+                  <a href="./pages/pokedex.html">
+                      <button data-tooltip="Pokemon Index " class="grow">📖</button>
+                  </a>
+                </li>
+                
+            </ul>
         </div>
-        <div id="pokeBall" class="hide">
-            <h3></h3>
-            <img class="pokemon_image">
+        <img src="./assets/forest.webp" class="battle-background" alt="Battle Background" style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 0;">
+
+        <!-- Battle Screen -->
+        <div class="battle-screen">
+            <img src="./assets/logo.webp" class="pokemon-logo" alt="Pokémon Logo"/>
+
+            <!-- Pokémon Battle Area (Placeholder) -->
+            <div class="battle-area">
+                <div class="wild-pokemon">
+                    <h5 id="wild-poke-name">??</h5>
+                    <img id="wild-poke-img" src="" alt="Wild Pokémon">
+                    <p>Level: <span id="wild-poke-level">??</span></p>
+                </div>
+            </div>
+
+            <!-- Pokéballs Section -->
+            <div class="pokeball-container">
+                <div class="pokeball-title">Your Pokémon</div>
+                <ul class="pokeball-list list-unstyled">
+                    <li><img src="./assets/pokeball.jpg" class="pokeball" data-tooltip="Click to reveal" alt="Pokéball"></li>
+                    <li><img src="./assets/pokeball.jpg" class="pokeball" data-tooltip="Click to reveal" alt="Pokéball"></li>
+                    <li><img src="./assets/pokeball.jpg" class="pokeball" data-tooltip="Click to reveal" alt="Pokéball"></li>
+                    <li><img src="./assets/pokeball.jpg" class="pokeball" data-tooltip="Click to reveal" alt="Pokéball"></li>
+                    <li><img src="./assets/pokeball.jpg" class="pokeball" data-tooltip="Click to reveal" alt="Pokéball"></li>
+                </ul>
+            </div>
         </div>
-        <script src="popup.js"></script>
-    </body>
+        
+        <!-- Pokémon Info Pop-up -->
+        <div class="pokemon-info">
+            <h5 id="poke-name">??</h5>
+            <img id="poke-img" src="" alt="Pokémon">
+            <p>Level: <span id="poke-level">??</span></p>
+            <div class="health-bar">
+                <div class="health-fill" id="poke-health"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./landing.js"></script>
+</body>
 </html>
