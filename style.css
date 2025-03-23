@@ -100,3 +100,24 @@ img {
     visibility: visible;
     transform: translateX(0);
 }
+.wild-pokemon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+    color: wheat;
+}
+.wild-pokemon img {
+    width: 120px;
+    height: 120px;
+    z-index: 3;
+
+}
