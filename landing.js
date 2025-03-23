@@ -60,9 +60,11 @@ const pokeballs = document.querySelectorAll(".pokeball");
         ];
 
         function switchBackground() {
-            const battleBackground = document.querySelector('.battle-background');
+            const background1 = document.querySelector('.background-1');
+            const background2 = document.querySelector('.background-2');
             const randomIndex = Math.floor(Math.random() * backgrounds.length);
-            battleBackground.src = `./assets/battleback${randomIndex+1}.png`;
+            background1.style.backgroundImage = `url('./assets/battleback${randomIndex+1}-1.png')`;
+            background2.style.backgroundImage = `url('./assets/battleback${randomIndex+1}-2.png')`;
         }
 
         switchBackground();

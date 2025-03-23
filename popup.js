@@ -90,3 +90,32 @@ function showPokemon(response){
     level.innerText = response.level
     catchPokemon(response)
 }
+
+// Compile the templates
+const profileTemplateSource = document.getElementById('profile-template').innerHTML;
+const buttonTemplateSource = document.getElementById('button-template').innerHTML;
+
+// Compile the templates using Handlebars
+const profileTemplate = Handlebars.compile(profileTemplateSource);
+const buttonTemplate = Handlebars.compile(buttonTemplateSource);
+
+// Context data for the templates
+const profileData = {
+  name: 'John Doe',
+  email: 'john@example.com',
+};
+
+const buttonData = {
+  label: 'Click Me',
+};
+
+// Render the profile template
+document.getElementById('profile').innerHTML = profileTemplate(profileData);
+
+// Render the button template and insert it into the container
+document.getElementById('container').innerHTML = buttonTemplate(buttonData);
+
+// Adding event listener to the button
+document.querySelector('.handlebars-btn').addEventListener('click', () => {
+  alert('Button clicked!');
+});
