@@ -84,6 +84,9 @@
             margin-bottom: 10px;
         }
         .pokemon-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
             width: 100%;
             overflow-y: auto;
             overflow-x: clip;
@@ -91,7 +94,9 @@
         }
         .pokemon-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             padding: 8px;
             border-bottom: 1px solid #ddd;
             cursor: pointer;
@@ -106,7 +111,10 @@
         .pokemon-item img {
             width: 45px;
             height: 45px;
-            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .pokemon-item span {
+            text-align: center;
         }
         /* Tooltips for Pokémon Items */
         .pokemon-item::after {
@@ -138,6 +146,28 @@
             background-color: #fff7e6;
             border-radius: 5px;
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .pagination button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #ffcc00;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #pokemonDetails{
+            position: absolute;
+            height: 100%;
+            width: 90%;
+        }
     </style>
 </head>
 <body>
@@ -159,6 +189,10 @@
         <!-- Pokémon List -->
         <div class="pokemon-list" id="pokemonList">
             <!-- Pokémon items will be injected here dynamically -->
+        </div>
+        <div class="pagination" id="pagination">
+            <button id="prevPage" disabled>Previous</button>
+            <button id="nextPage">Next</button>
         </div>
 
         <!-- Pokémon Details Panel -->

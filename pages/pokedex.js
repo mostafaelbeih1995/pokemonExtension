@@ -1,23 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const apiUrl = "https://pokeapi.co/api/v2/pokemon?limit=10"; 
+    const apiUrl = "https://pokeapi.co/api/v2/pokemon";
+    let currentPage = 1;
+    const limit = 10;
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const pokemonList = document.getElementById("pokemonList");
-            data.results.forEach((pokemon, index) => {
-                let pokemonItem = document.createElement("div");
-                pokemonItem.className = "pokemon-item";
-                pokemonItem.setAttribute("data-url", pokemon.url);
-                pokemonItem.setAttribute("data-tooltip", "Click for details");
-                pokemonItem.innerHTML = `
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png" alt="${pokemon.name}">
-                    <span>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</span>
-                `;
-                pokemonItem.addEventListener("click", () => fetchPokemonDetails(pokemon.url));
-                pokemonList.appendChild(pokemonItem);
+    function fetchPokemonList(page) {
+        const offset = (page - 1) * limit;
+        fetch(`${apiUrl}?limit=${limit}&offset=${offset}`)
+            .then(response => response.json())
+            .then(data => {
+                const pokemonList = document.getElementById("pokemonList");
+                pokemonList.innerHTML = "";
+                data.results.forEach((pokemon, index) => {
+                    let pokemonItem = document.createElement("div");
+                    pokemonItem.className = "pokemon-item";
+                    pokemonItem.setAttribute("data-url", pokemon.url);
+                    // pokemonItem.setAttribute("data-tooltip", pokemon.name);
+                    pokemonItem.innerHTML = `
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${offset + index + 1}.png" alt="${pokemon.name}">
+                        <span>${capitalize(pokemon.name)}</span>
+                    `;
+                    pokemonItem.addEventListener("click", () => fetchPokemonDetails(pokemon.url));
+                    pokemonList.appendChild(pokemonItem);
+                });
+                updatePagination(data.previous, data.next);
             });
-        });
+    }
 
     function fetchPokemonDetails(url) {
         fetch(url)
@@ -37,6 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+    function updatePagination(previous, next) {
+        document.getElementById("prevPage").disabled = !previous;
+        document.getElementById("nextPage").disabled = !next;
+    }
+
     document.getElementById("searchInput").addEventListener("input", function () {
         let value = this.value.toLowerCase();
         document.querySelectorAll(".pokemon-item").forEach(function (item) {
@@ -48,4 +60,18 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("closeDetails").addEventListener("click", function () {
         document.getElementById("pokemonDetails").style.display = "none";
     });
+
+    document.getElementById("prevPage").addEventListener("click", function () {
+        if (currentPage > 1) {
+            currentPage--;
+            fetchPokemonList(currentPage);
+        }
+    });
+
+    document.getElementById("nextPage").addEventListener("click", function () {
+        currentPage++;
+        fetchPokemonList(currentPage);
+    });
+
+    fetchPokemonList(currentPage);
 });
