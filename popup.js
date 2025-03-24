@@ -12,6 +12,21 @@ const pokeHealth = document.getElementById("poke-health");
 
 chrome.runtime.sendMessage({text:"REQUEST_POKEMON"},showPokemon)
 
+document.addEventListener("DOMContentLoaded", () => {
+    
+    const btn = document.getElementById("clickBtn");
+    btn.addEventListener("click", () => {
+        renderComponent('Smoke Test !!!!!')
+
+    });
+  });
+  
+  function renderComponent(team) {
+    const container = document.getElementById("pokemon-title");
+    if (container) {
+      container.innerHTML = team;
+    }
+  }
 // myPokemonBtn.addEventListener('click', displayMyPoke)
 
 function rewritePokemonList(){

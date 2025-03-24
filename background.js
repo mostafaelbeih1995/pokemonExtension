@@ -14,7 +14,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
 
 
 
-chrome.runtime.onMessage.addListener(sendPokeBall);
+chrome.runtime.onMessage.addListener(listenForResponse);
 
 
 function setAttributes(json){
@@ -23,10 +23,16 @@ function setAttributes(json){
     currentPokemon.level = Math.ceil(Math.random() * 100)
 };
 
-function sendPokeBall(request, sender, sendResponse){
-    console.log("Sending message to popup.js")
+function listenForResponse(request, sender, sendResponse){
+    console.log("Listening to Response..........");
+    
     if(request.text === "REQUEST_POKEMON"){
         sendResponse(currentPokemon);
+    }
+
+    if (request.action === "getTeamInfo") {
+        console.log("Sending team info...");
+        sendResponse({ team: "rocket" });
     }
 };
 
