@@ -24,6 +24,7 @@ function setAttributes(json){
 };
 
 function sendPokeBall(request, sender, sendResponse){
+    console.log("Sending message to popup.js")
     if(request.text === "REQUEST_POKEMON"){
         sendResponse(currentPokemon);
     }

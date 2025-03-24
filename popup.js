@@ -1,15 +1,21 @@
-const title = document.querySelector('#pokemon_name')
-const image = document.querySelector('.pokemon_image')
+const pokeName = document.getElementById("wild-poke-name")
+const pokeImg = document.getElementById("wild-poke-img")
 const catchBtn = document.querySelector('.catch')
-const level = document.querySelector('span')
+const pokeLevel = document.getElementById("wild-poke-level").textContent
 const pokemonList = document.querySelector('#pokeBall')
 const myPokemonBtn = document.querySelector('#my_pokemon')
+
+const infoBox = document.querySelector(".pokemon-info");
+// const pokeName = document.getElementById("poke-name");
+// const pokeImg = document.getElementById("poke-img");
+// const pokeLevel = document.getElementById("poke-level");
+const pokeHealth = document.getElementById("poke-health");
 
 
 
 chrome.runtime.sendMessage({text:"REQUEST_POKEMON"},showPokemon)
 
-myPokemonBtn.addEventListener('click', displayMyPoke)
+// myPokemonBtn.addEventListener('click', displayMyPoke)
 
 function rewritePokemonList(){
 
@@ -63,7 +69,7 @@ function rewritePokemonList(){
 
 function displayMyPoke(){
 
-    pokemonList.classList.toggle('show');
+    // pokemonList.classList.toggle('show');
 }
 
 function catchPokemon(response){
@@ -87,41 +93,46 @@ function catchPokemon(response){
     })
 }
 function showPokemon(response){
-    rewritePokemonList();
-    console.log(response)
+    console.log("receiveddd..................")
+    // rewritePokemonList();
+    console.log(response);
     let pokemons = localStorage.getItem("pokemonCollection");
     console.log(pokemons);
-    title.innerText = `A wild ${response.name} appeared neek`
-    image.src = response.imageUrl
-    level.innerText = response.level
-    catchPokemon(response)
+    // title.innerText = `A wild ${response.name} appeared neek`
+    // image.src = response.imageUrl
+    // level.innerText = response.level
+    pokeName.innerHTML = `A wild ${response.name} appeared neek`
+    pokeImg.src = response.imageUrl
+    pokeLevel.innerHTML = response.level
+    
+    // catchPokemon(response)
 }
 
 // Compile the templates
-const profileTemplateSource = document.getElementById('profile-template').innerHTML;
-const buttonTemplateSource = document.getElementById('button-template').innerHTML;
+// const profileTemplateSource = document.getElementById('profile-template').innerHTML;
+// const buttonTemplateSource = document.getElementById('button-template').innerHTML;
 
 // Compile the templates using Handlebars
-const profileTemplate = Handlebars.compile(profileTemplateSource);
-const buttonTemplate = Handlebars.compile(buttonTemplateSource);
+// const profileTemplate = Handlebars.compile(profileTemplateSource);
+// const buttonTemplate = Handlebars.compile(buttonTemplateSource);
 
 // Context data for the templates
-const profileData = {
-  name: 'John Doe',
-  email: 'john@example.com',
-};
+// const profileData = {
+//   name: 'John Doe',
+//   email: 'john@example.com',
+// };
 
-const buttonData = {
-  label: 'Click Me',
-};
+// const buttonData = {
+//   label: 'Click Me',
+// };
 
-// Render the profile template
-document.getElementById('profile').innerHTML = profileTemplate(profileData);
+// // Render the profile template
+// document.getElementById('profile').innerHTML = profileTemplate(profileData);
 
-// Render the button template and insert it into the container
-document.getElementById('container').innerHTML = buttonTemplate(buttonData);
+// // Render the button template and insert it into the container
+// document.getElementById('container').innerHTML = buttonTemplate(buttonData);
 
-// Adding event listener to the button
-document.querySelector('.handlebars-btn').addEventListener('click', () => {
-  alert('Button clicked!');
-});
+// // Adding event listener to the button
+// document.querySelector('.handlebars-btn').addEventListener('click', () => {
+//   alert('Button clicked!');
+// });
