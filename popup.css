@@ -1,0 +1,195 @@
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.battle-container {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.menu {
+    width: 60px;
+    background-color: #f8f9fa00;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
+}
+
+.menu button {
+    margin: 8px 0;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #ffcc00;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.menu button:hover {
+    transform: scale(1.1);
+}
+
+.menu button::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 120%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateX(10px);
+}
+
+.menu button:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.battle-screen {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.pokemon-logo {
+    width: 210px;
+    z-index: 2;
+}
+
+.battle-area {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    color: #f8f9fa;
+}
+
+.wild-pokemon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.wild-pokemon img {
+    max-width: 120px;
+    height: auto;
+}
+
+.pokeball-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.pokeball-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.pokeball-list {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    background-color: #f8f9fa40;
+    border-radius: 20px;
+    border: 0.5px solid #28a745;
+    padding: 5px;
+    z-index: 2;
+}
+
+.pokeball {
+    width: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.pokeball:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+/* Pokémon Info Box */
+.pokemon-info {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 2px solid #333;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    border-radius: 5px;
+    z-index: 3;
+}
+
+.pokemon-info img {
+    width: 80px;
+    height: 80px;
+}
+
+.health-bar {
+    height: 8px;
+    width: 100%;
+    background: #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+    position: relative;
+}
+
+.health-fill {
+    height: 100%;
+    background: #28a745;
+    border-radius: 5px;
+}
+
+.background-1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./assets/battleback1-1.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 2;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.background-2 {
+    position: fixed;
+    top: 0;
+}
