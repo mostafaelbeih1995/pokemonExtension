@@ -1,3 +1,10 @@
+const pokeName = document.getElementById("wild-poke-name")
+const pokeImg = document.getElementById("wild-poke-img");
+const pokeLevel = document.getElementById("wild-poke-level");
+const catcheMeBtn = document.getElementById("catchMeBtn");
+var currentPokemon;
+
+
 const port = chrome.runtime.connect({ name: "TEAM_ROCKET" });
 const testDiv = document.getElementById("testDiv");
 
@@ -6,7 +13,10 @@ port.postMessage({ request: "SEND_INITIAL_POKEMON" });
 port.onMessage.addListener((msg) => {
 
     if(msg.starterPokemon){
-    pokeImg.src = msg.starterPokemon.imageUrl
+        currentPokemon = msg.starterPokemon;
+        pokeImg.src = msg.starterPokemon.imageUrl;
+        pokeName.innerHTML = msg.starterPokemon.name;
+        pokeLevel.innerHTML = msg.starterPokemon.level;
     }
     else if (msg.question === "Who's there?") {
     // testDiv.innerHTML += `<p>${msg.question}</p>`;
@@ -29,8 +39,26 @@ port.onMessage.addListener((msg) => {
     // port.disconnect(); // Optional: Disconnect when done
     }
 });
-// const pokeName = document.getElementById("wild-poke-name")
-const pokeImg = document.getElementById("wild-poke-img")
+
+catcheMeBtn.addEventListener('click', () => {
+
+    let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
+    const pokemon = {
+        name: currentPokemon.name,
+        imageUrl: currentPokemon.imageUrl,
+        level: currentPokemon.level
+    }
+    if(pokemonCollection.length < 6){
+        pokemonCollection.push(pokemon);
+        localStorage.setItem('pokemonCollection', JSON.stringify(pokemonCollection));
+        rewritePokemonList();
+        title.innerText = `You caught a ${response.name}`
+    } else{
+        console.log("Maximum team is 6 pokemons... chose wisel !!");
+        console.log(pokemonCollection.length);
+    }
+    
+});
     
 function renderComponent(team) {
     const container = document.getElementById("pokemon-title");
@@ -95,7 +123,7 @@ function displayMyPoke(){
 }
 
 function catchPokemon(response){
-    catchBtn.addEventListener('click', () => {
+    catcheMeBtn.addEventListener('click', () => {
         let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
         const pokemon = {
             name: response.name,
@@ -112,7 +140,7 @@ function catchPokemon(response){
             console.log(pokemonCollection.length);
         }
         
-    })
+    });
 }
 function showPokemon(response){
     console.log("receiveddd..................")

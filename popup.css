@@ -2,14 +2,14 @@ body {
     background-color: #f8f9fa;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .battle-container {
     width: 400px;
-    height: 400px;
-    background-color: white;
+    background: linear-gradient(135deg, #1a1a2e, #3a0ca3);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -20,9 +20,10 @@ body {
 
 .menu {
     width: 60px;
-    background-color: #f8f9fa00;
+    background-color: transparent;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    justify-content: flex-end; /* ✅ Push buttons to the bottom */
     align-items: center;
     padding: 10px 0;
     z-index: 100;
@@ -103,18 +104,38 @@ body {
 }
 
 .pokeball-container {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 10px;
+    padding: 10px; */
+    text-align: center;
+    background: linear-gradient(135deg, #f0f8ff, #cce7ff);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    max-width: 500px;
+    margin: 0 auto;
 }
+
+#catchMeBtn {
+    background-color: #ef5350; /* Pokémon red */
+    color: white;
+    /* font-size: 18px; */
+    font-weight: bold;
+    /* padding: 12px 24px; */
+    border: none;
+    /* border-radius: 999px; */
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(239, 83, 80, 0.4);
+    transition: all 0.3s ease;
+  }
 
 .pokeball-title {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
+    color: #000000;
 }
 
 .pokeball-list {
