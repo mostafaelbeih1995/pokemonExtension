@@ -12,7 +12,6 @@ chrome.runtime.onConnect.addListener(function(port) {
   
     port.onMessage.addListener(function(msg) {
       if (msg.request === "SEND_INITIAL_POKEMON") {
-        // port.postMessage({starterPokemon: currentPokemon});
         port.postMessage({ question: "Who's there?" });
       } else if (msg.answer === "Madame") {
         port.postMessage({ question: "Madame who?" });
@@ -41,16 +40,6 @@ function setAttributes(json){
     currentPokemon.name = json.forms[0].name
     currentPokemon.imageUrl = json.sprites.front_default
     currentPokemon.level = Math.ceil(Math.random() * 100)
-};
-
-function listenForResponse(request, sender, sendResponse){
-    console.log("Listening to Response..........");
-
-    if (request.action === "REQUEST_TEAM_INFO") {
-        console.log("Sending team info...");
-        sendResponse({ team: "rocket" });
-        return true
-    }
 };
 
 
