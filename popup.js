@@ -121,39 +121,3 @@ function displayMyPoke(){
 
     // pokemonList.classList.toggle('show');
 }
-
-function catchPokemon(response){
-    catcheMeBtn.addEventListener('click', () => {
-        let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
-        const pokemon = {
-            name: response.name,
-            imageUrl: response.imageUrl,
-            level: response.level
-        }
-        if(pokemonCollection.length < 6){
-            pokemonCollection.push(pokemon);
-            localStorage.setItem('pokemonCollection', JSON.stringify(pokemonCollection));
-            rewritePokemonList();
-            title.innerText = `You caught a ${response.name}`
-        } else{
-            console.log("Maximum team is 6 pokemons... chose wisel !!");
-            console.log(pokemonCollection.length);
-        }
-        
-    });
-}
-function showPokemon(response){
-    console.log("receiveddd..................")
-    // rewritePokemonList();
-    console.log(response);
-    let pokemons = localStorage.getItem("pokemonCollection");
-    console.log(pokemons);
-    // title.innerText = `A wild ${response.name} appeared neek`
-    // image.src = response.imageUrl
-    // level.innerText = response.level
-    pokeName.innerHTML = `A wild ${response.name} appeared neek`
-    pokeImg.src = response.imageUrl
-    pokeLevel.innerHTML = response.level
-    
-    // catchPokemon(response)
-}
