@@ -17,25 +17,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="${pokemon.name}">
                 <span>${capitalize(pokemon.name)}</span>
             `;
-            pokemonItem.addEventListener("click", () => fetchPokemonDetails(pokemon.url));
+            // pokemonItem.addEventListener("click", () => fetchPokemonDetails(pokemon.url));
             pokemonList.appendChild(pokemonItem);
         });
-                updatePagination(data.previous, data.next);
+                // updatePagination(data.previous, data.next);
     }
 
-    function fetchPokemonDetails(url) {
-        fetch(url)
-            .then(response => response.json())
-            .then(pokemon => {
-                document.getElementById("pokeName").textContent = capitalize(pokemon.name);
-                document.getElementById("pokeImage").src = pokemon.sprites.front_default;
-                document.getElementById("pokeType").textContent = pokemon.types.map(t => t.type.name).join(", ");
-                document.getElementById("pokeHeight").textContent = pokemon.height;
-                document.getElementById("pokeWeight").textContent = pokemon.weight;
-                document.getElementById("pokeAbilities").textContent = pokemon.abilities.map(a => a.ability.name).join(", ");
-                document.getElementById("pokemonDetails").style.display = "block";
-            });
-    }
+    // function fetchPokemonDetails(url) {
+    //     fetch(url)
+    //         .then(response => response.json())
+    //         .then(pokemon => {
+    //             document.getElementById("pokeName").textContent = capitalize(pokemon.name);
+    //             document.getElementById("pokeImage").src = pokemon.sprites.front_default;
+    //             document.getElementById("pokeType").textContent = pokemon.types.map(t => t.type.name).join(", ");
+    //             document.getElementById("pokeHeight").textContent = pokemon.height;
+    //             document.getElementById("pokeWeight").textContent = pokemon.weight;
+    //             document.getElementById("pokeAbilities").textContent = pokemon.abilities.map(a => a.ability.name).join(", ");
+    //             document.getElementById("pokemonDetails").style.display = "block";
+    //         });
+    // }
 
     function capitalize(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
