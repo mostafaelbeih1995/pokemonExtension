@@ -216,15 +216,15 @@ body {
 }
 
 #starterScreen {
-    background: linear-gradient(135deg, #f0f4ff, #d8eaff);
-    border: 2px solid #3a0ca3;
+    background: linear-gradient(135deg, #f8ecc5, #d8eaff);
+    border: 2px solid #815017;
     border-radius: 12px;
-    padding: 30px 20px;
+    padding: 30px 20px; 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     text-align: center;
     max-width: 400px;
     margin: 50px auto;
-  }
+}
   
   #starterScreen h2 {
     margin-bottom: 20px;
