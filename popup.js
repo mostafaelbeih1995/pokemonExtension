@@ -148,6 +148,7 @@ function initCheatCodes() {
         level: 150
       },
       abra: {
+        id: 63,
         name: "Abra",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/63.png",
         level: 150
