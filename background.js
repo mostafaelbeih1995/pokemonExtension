@@ -1,4 +1,5 @@
 let currentPokemon = {
+    id: 19,
     name: "rattata",
     imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/19.png",
     level: 1
@@ -40,6 +41,7 @@ function setAttributes(json){
     currentPokemon.name = json.forms[0].name
     currentPokemon.imageUrl = json.sprites.front_default
     currentPokemon.level = Math.ceil(Math.random() * 100)
+    currentPokemon.id = json.id
 };
 
 

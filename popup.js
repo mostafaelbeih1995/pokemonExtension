@@ -46,7 +46,8 @@ catcheMeBtn.addEventListener('click', () => {
     const pokemon = {
         name: currentPokemon.name,
         imageUrl: currentPokemon.imageUrl,
-        level: currentPokemon.level
+        level: currentPokemon.level,
+        id: currentPokemon.id
     }
     if(pokemonCollection.length < 6){
         pokemonCollection.push(pokemon);
