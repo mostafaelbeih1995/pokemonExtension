@@ -2,13 +2,48 @@ const pokeName = document.getElementById("wild-poke-name")
 const pokeImg = document.getElementById("wild-poke-img");
 const pokeLevel = document.getElementById("wild-poke-level");
 const catcheMeBtn = document.getElementById("catchMeBtn");
-var currentPokemon;
-
-
 const port = chrome.runtime.connect({ name: "TEAM_ROCKET" });
 const testDiv = document.getElementById("testDiv");
+var currentPokemon;
+
+//delete localStorage for new user testing
+localStorage.removeItem("pokemonCollection");
 
 port.postMessage({ request: "SEND_INITIAL_POKEMON" });
+
+console.log("New user? ", newUser());
+
+const starterScreen = document.getElementById("starterScreen");
+const mainScreen = document.querySelector(".battle-container");
+
+  if (newUser()) {
+    starterScreen.style.display = "block";
+    mainScreen.style.display = "none";
+  } else {
+    starterScreen.style.display = "none";
+    mainScreen.style.display = "flex";
+  }
+
+  document.querySelectorAll(".starter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const name = btn.dataset.name;
+      const id = btn.dataset.id;
+      const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+      console.log(name, id); // ✅ test here
+
+      const starterPokemon = {
+        id:id,
+        name: name,
+        imageUrl: image,
+        level: 5
+      };
+      rewritePokemonList();
+      localStorage.setItem("pokemonCollection", JSON.stringify([starterPokemon]));
+
+      starterScreen.style.display = "none";
+      mainScreen.style.display = "flex";
+    });
+  });
 
 port.onMessage.addListener((msg) => {
 
@@ -19,24 +54,26 @@ port.onMessage.addListener((msg) => {
         pokeLevel.innerHTML = msg.starterPokemon.level;
     }
     else if (msg.question === "Who's there?") {
-    // testDiv.innerHTML += `<p>${msg.question}</p>`;
-    port.postMessage({ answer: "Madame" });
+        // else if (msg.newUser) {
+        // console.log(msg.newUser);
+        // testDiv.innerHTML += `<p>${msg.question}</p>`;
+        port.postMessage({ answer: "Madame" });
     } else if (msg.question === "Madame who?") {
-    // testDiv.innerHTML += `<p>${msg.question}</p>`;
-    port.postMessage({ request: "SEND_POKEMON" });
-} else if (msg.request === "SEND_POKEMON") {
-    // testDiv.innerHTML += `<p>${msg.question}</p>`;
-    port.postMessage({ answer: "Madame... Bovary" });
-} else if (msg.starterPo === "SEND_POKEMON") {
-    // testDiv.innerHTML += `<p>${msg.question}</p>`;
-    port.postMessage({ answer: "Madame... Bovary" });
-} else if (msg.pokemonFound) {
-    // testDiv.innerHTML += `<p>Pokemon Found</p>`;
-    pokeImg.src = msg.pokemonFound.imageUrl
-    // port.disconnect(); // Optional: Disconnect when done
+        // testDiv.innerHTML += `<p>${msg.question}</p>`;
+        port.postMessage({ request: "SEND_POKEMON" });
+    } else if (msg.request === "SEND_POKEMON") {
+        // testDiv.innerHTML += `<p>${msg.question}</p>`;
+        port.postMessage({ answer: "Madame... Bovary" });
+    } else if (msg.starterPo === "SEND_POKEMON") {
+        // testDiv.innerHTML += `<p>${msg.question}</p>`;
+        port.postMessage({ answer: "Madame... Bovary" });
+    } else if (msg.pokemonFound) {
+        // testDiv.innerHTML += `<p>Pokemon Found</p>`;
+        pokeImg.src = msg.pokemonFound.imageUrl
+        // port.disconnect(); // Optional: Disconnect when done
     } else if (msg.done) {
-    // testDiv.innerHTML += `<p>${msg.done}</p>`;
-    // port.disconnect(); // Optional: Disconnect when done
+        // testDiv.innerHTML += `<p>${msg.done}</p>`;
+        // port.disconnect(); // Optional: Disconnect when done
     }
 });
 
@@ -118,7 +155,7 @@ function rewritePokemonList(){
     }
 }
 
-function displayMyPoke(){
-
-    // pokemonList.classList.toggle('show');
-}
+function newUser(){
+    let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
+    return pokemonCollection.length == 0;
+  }

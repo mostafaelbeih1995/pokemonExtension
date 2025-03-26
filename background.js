@@ -7,13 +7,13 @@ let currentPokemon = {
 
 chrome.runtime.onConnect.addListener(function(port) {
     if (port.name !== "TEAM_ROCKET") return;
-  
-    console.log("Connected to popup via port:", port);
+    console.log("Connected to popup via port");
     port.postMessage({starterPokemon: currentPokemon});
   
     port.onMessage.addListener(function(msg) {
       if (msg.request === "SEND_INITIAL_POKEMON") {
         port.postMessage({ question: "Who's there?" });
+        // port.postMessage({ newUser: checkNewUser() });
       } else if (msg.answer === "Madame") {
         port.postMessage({ question: "Madame who?" });
       } else if (msg.answer === "Madame... Bovary") {
@@ -43,6 +43,11 @@ function setAttributes(json){
     currentPokemon.level = Math.ceil(Math.random() * 100)
     currentPokemon.id = json.id
 };
+
+// function checkNewUser(){
+//   let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || []
+//   return pokemonCollection.length == 0;
+// }
 
 
 

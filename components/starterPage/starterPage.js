@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const pokemonList = document.getElementById("pokemonList");
         pokemonList.innerHTML = "";
         myPokemonList.forEach((pokemon, index) => {
-            console.log(myPokemonList);
             let pokemonItem = document.createElement("div");
             // pokemonItem.className = "pokemon-item";
             // pokemonItem.setAttribute("data-url", pokemon.image);
