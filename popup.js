@@ -7,9 +7,10 @@ const testDiv = document.getElementById("testDiv");
 var currentPokemon;
 
 //delete localStorage for new user testing
-localStorage.removeItem("pokemonCollection");
+// localStorage.removeItem("pokemonCollection");
 
 port.postMessage({ request: "SEND_INITIAL_POKEMON" });
+initCheatCodes();
 
 console.log("New user? ", newUser());
 
@@ -97,6 +98,33 @@ catcheMeBtn.addEventListener('click', () => {
     }
     
 });
+
+document.getElementById("cheatSubmit").addEventListener("click", () => {
+    const input = document.getElementById("cheatCode");
+    const cheatCode = input.value.trim().toLowerCase();
+
+    const cheatMap = JSON.parse(localStorage.getItem("cheatCodes"));
+
+    if (!cheatMap || !cheatMap[cheatCode]) {
+        alert("Invalid cheat code 🕵️‍♂️");
+        input.value = "";
+        return;
+    }
+
+    const specialPokemon = cheatMap[cheatCode];
+
+    const collection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
+    collection.push(specialPokemon);
+
+    localStorage.setItem("pokemonCollection", JSON.stringify(collection));
+    alert(`You unlocked ${specialPokemon.name}! 🥳`);
+
+    // Clear input
+    input.value = "";
+
+    starterScreen.style.display = "none";
+    mainScreen.style.display = "flex";
+  });
     
 function renderComponent(team) {
     const container = document.getElementById("pokemon-title");
@@ -158,4 +186,38 @@ function rewritePokemonList(){
 function newUser(){
     let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
     return pokemonCollection.length == 0;
+}
+
+function initCheatCodes() {
+    const cheatList = {
+      mewtwo: {
+        id: 150, 
+        name: "Mewtwo",
+        imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
+        level: 80
+      },
+      masterball: {
+        name: "Masterballmon",
+        imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png", // Optional visual
+        level: 100
+      },
+      shinycharizard: {
+        name: "Shiny Charizard",
+        imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/6.png",
+        level: 70
+      },
+      legendarytrio: {
+        id: 145,
+        name: "Zapdos",
+        imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/145.png",
+        level: 65
+      },
+      pikagod: {
+        name: "Pikachu (God Mode)",
+        imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+        level: 99
+      }
+    };
+  
+    localStorage.setItem("cheatCodes", JSON.stringify(cheatList));
   }

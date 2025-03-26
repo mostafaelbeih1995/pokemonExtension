@@ -9,7 +9,6 @@ chrome.runtime.onConnect.addListener(function(port) {
     if (port.name !== "TEAM_ROCKET") return;
     console.log("Connected to popup via port");
     port.postMessage({starterPokemon: currentPokemon});
-  
     port.onMessage.addListener(function(msg) {
       if (msg.request === "SEND_INITIAL_POKEMON") {
         port.postMessage({ question: "Who's there?" });
@@ -43,11 +42,3 @@ function setAttributes(json){
     currentPokemon.level = Math.ceil(Math.random() * 100)
     currentPokemon.id = json.id
 };
-
-// function checkNewUser(){
-//   let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || []
-//   return pokemonCollection.length == 0;
-// }
-
-
-
