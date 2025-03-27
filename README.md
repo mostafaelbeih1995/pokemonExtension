@@ -28,6 +28,7 @@ Let’s create something amazing together. If you’ve got ideas, questions, or 
 ## How to run
 
 Download this repo as zip or clone it.
+![Alt text](assets/intro5.PNG "Overview")
 
 unzip folder
 
