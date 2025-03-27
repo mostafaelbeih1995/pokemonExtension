@@ -1,6 +1,6 @@
 # Pokemon Catcher
 
-![Alt text](clickbait.PNG "Overview")
+![Alt text](assets/clickbait.PNG "Overview")
 
 
 ## Intro
