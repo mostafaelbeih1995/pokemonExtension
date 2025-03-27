@@ -101,8 +101,38 @@
         <input type="text" id="cheatCode" placeholder="Enter Cheat Code..." class="cheat-input">
         <button id="cheatSubmit" class="cheat-btn">Cheat</button>
     </div>
+    </div>
+    <div id="evilStarterScreen" style="display: none;">
+        <h2>Choose Your Evil Starter</h2>
+        <div class="starter-options evil-options">
+          <button class="starter-btn evil-btn" data-name="Ekans" data-id="23">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/23.png" alt="Ekans">
+            <span>Ekans</span>
+          </button>
+          <button class="starter-btn evil-btn" data-name="Grimer" data-id="88">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/88.png" alt="Houndour">
+            <span>Grimer</span>
+          </button>
+          <button class="starter-btn evil-btn" data-name="Koffing" data-id="109">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/109.png" alt="Murkrow">
+            <span>Koffing</span>
+          </button>
+        </div>
+      </div>
       
-</div>
+    <div id="teamScreen" style="display: none;">
+        <h2>Choose Your Team</h2>
+        <div class="team-options">
+          <button class="team-btn good-team" data-team="good">
+            <!-- <img src="./assets/team-good.png" alt="Team Good"> -->
+            <span>Team Good</span>
+          </button>
+          <button class="team-btn evil-team" data-team="evil">
+            <!-- <img src="./assets/team-evil.png" alt="Team Evil"> -->
+            <span>Team Evil</span>
+          </button>
+        </div>
+      </div>
     <script src="./landing.js"></script>
     <script src="./popup.js"></script>
 </body>

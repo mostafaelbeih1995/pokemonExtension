@@ -328,3 +328,108 @@ body {
     transform: scale(1.05);
   }
   
+  #teamScreen {
+    background: linear-gradient(135deg, #d4145a, #fbb03b); /* red to yellow */
+    border: 2px solid #000;
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    max-width: 400px;
+    margin: 50px auto;
+    color: white;
+  }
+  
+  .team-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .team-btn {
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .team-btn:hover {
+    transform: scale(1.05);
+    background-color: #f9b400;
+  }
+  
+  .team-btn img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 6px;
+  }
+  
+  .good-team {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .evil-team {
+    background-color: #b71c1c;
+    color: white;
+  }
+  
+  #evilStarterScreen {
+    background: linear-gradient(135deg, #3c333f, #6b6a6a); /* Dark purple to black */
+    border: 2px solid #880e4f;
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    max-width: 400px;
+    margin: 50px auto;
+    color: #eee;
+  }
+  
+  .evil-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    flex-direction: row;
+  }
+  
+  .evil-btn {
+    background-color: #912525;
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: white;
+  }
+  
+  .evil-btn:hover {
+    transform: scale(1.05);
+    background-color: #912525;
+  }
+  
+  .evil-btn img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 6px;
+  }
+  

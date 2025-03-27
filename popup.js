@@ -16,14 +16,33 @@ console.log("New user? ", newUser());
 
 const starterScreen = document.getElementById("starterScreen");
 const mainScreen = document.querySelector(".battle-container");
+const teamScreen = document.getElementById("teamScreen");
 
   if (newUser()) {
-    starterScreen.style.display = "block";
+    teamScreen.style.display = "block";
+    starterScreen.style.display = "none";
     mainScreen.style.display = "none";
   } else {
+    teamScreen.style.display = "none";
     starterScreen.style.display = "none";
     mainScreen.style.display = "flex";
   }
+
+  document.querySelectorAll(".team-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const selectedTeam = btn.dataset.team;
+      localStorage.setItem("selectedTeam", selectedTeam);
+      teamScreen.style.display = "none";
+      starterScreen.style.display = "block";
+      if (selectedTeam === "evil") {
+        evilStarterScreen.style.display = "block";
+        starterScreen.style.display = "none";
+      } else {
+        starterScreen.style.display = "block";
+        evilStarterScreen.style.display = 'none';
+      }
+    });
+  });
 
   document.querySelectorAll(".starter-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -41,6 +60,7 @@ const mainScreen = document.querySelector(".battle-container");
       localStorage.setItem("pokemonCollection", JSON.stringify([starterPokemon]));
 
       starterScreen.style.display = "none";
+      evilStarterScreen.style.display = "none";
       mainScreen.style.display = "flex";
     });
   });
