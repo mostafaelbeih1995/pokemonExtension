@@ -3,7 +3,24 @@
 ![Alt text](clickbait.PNG "Overview")
 
 
-This is a browser extension where you can grab the pokemons! When you change your tab a wild pokemon will appear and you can catch with your pokeball! This Chrome extension was build with HTML, CSS and JS
+## Intro
+
+
+🧠 We're a group of smart, creative, and intellectually curious software developers.
+We don’t just code — we design, integrate, and implement elegant solutions that make people go “wow.”
+
+🎯 What this project is NOT:
+
+Not for monetization 💰
+
+No deadlines ⏳
+
+No pressure 🚫
+
+Just passion, learning, and expression 🚀
+
+
+Let’s create something amazing together. If you’ve got ideas, questions, or just wanna geek out over Pokémon and code — this is the place!
 
 ## How to run
 
