@@ -152,6 +152,15 @@ document.getElementById("cheatSubmit").addEventListener("click", () => {
     starterScreen.style.display = "none";
     mainScreen.style.display = "flex";
   });
+
+  document.getElementById("restart").addEventListener("click", ()=>{
+    starterScreen.style.display = "none";
+    evilStarterScreen.style.display = "none";
+    mainScreen.style.display = "none";
+    teamScreen.style.display = "block"
+    localStorage.clear();
+
+  });
     
 function renderComponent(team) {
     const container = document.getElementById("pokemon-title");
