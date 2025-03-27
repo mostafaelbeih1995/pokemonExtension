@@ -112,6 +112,17 @@ catcheMeBtn.addEventListener('click', () => {
         console.log("Maximum team is 6 pokemons... chose wisel !!");
         console.log(pokemonCollection.length);
     }
+    const pokemonId = Math.ceil(Math.random()*151);
+    console.log("executing refresh pokemon")
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+    .then(response => response.json())
+    .then(json => {
+      let pokemon;
+      pokemon.name = json.forms[0].name;
+      pokemon.imageUrl = json.sprites.front_default;
+      pokemon.level = Math.ceil(Math.random() * 100);
+      pokemon.id = json.id;
+    })
     
 });
 
@@ -188,3 +199,10 @@ function initCheatCodes() {
   
     localStorage.setItem("cheatCodes", JSON.stringify(cheatList));
   }
+
+  function setAttributes(json){
+    currentPokemon.name = json.forms[0].name
+    currentPokemon.imageUrl = json.sprites.front_default
+    currentPokemon.level = Math.ceil(Math.random() * 100)
+    currentPokemon.id = json.id
+};
