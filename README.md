@@ -27,13 +27,15 @@ Let’s create something amazing together. If you’ve got ideas, questions, or 
 
 ## How to run
 
-First you need to clone this repository.
+Download this repo as zip or clone it.
 
-Open Google chrome and access `chrome://extensions/`
+unzip folder
+
+Open Google chrome and write in the url `chrome://extensions/` to open extensions
 
 Turn on the developer mode and choose the load unpacked option.
 
-Open the POKEMONEXTENSION folder and catch all Pokemons!
+Open the unzipped folder and catch all Pokemons!
 
 ## 🔍 Project Breakdown
 Your extension does the following:
