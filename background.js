@@ -20,14 +20,22 @@ chrome.runtime.onConnect.addListener(function(port) {
       }
       else if (msg.request === "SEND_POKEMON") {
 
-        console.log("creating pokemon ......."); 
+        console.log("Send new pokemon request......."); 
 
         const pokemonId = Math.ceil(Math.random()*151)
         fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
         .then(response => response.json())
-        .then(json => setAttributes(json))
-        console.log(currentPokemon)
-        port.postMessage({ pokemonFound: currentPokemon });
+        .then(json => {
+          // setAttributes(json);
+          currentPokemon = {
+            id: json.id,
+            name: json.forms[0].name,
+            imageUrl: json.sprites.front_default,
+            level: Math.ceil(Math.random() * 100)
+          };
+          console.log(currentPokemon);
+          port.postMessage({ pokemonFound: currentPokemon });
+        });
       }
     });
   
@@ -37,8 +45,8 @@ chrome.runtime.onConnect.addListener(function(port) {
   });
   
 function setAttributes(json){
-    currentPokemon.name = json.forms[0].name
-    currentPokemon.imageUrl = json.sprites.front_default
-    currentPokemon.level = Math.ceil(Math.random() * 100)
-    currentPokemon.id = json.id
+    currentPokemon.name = json.forms[0].name;
+    currentPokemon.imageUrl = json.sprites.front_default;
+    currentPokemon.level = Math.ceil(Math.random() * 100);
+    currentPokemon.id = json.id;
 };
