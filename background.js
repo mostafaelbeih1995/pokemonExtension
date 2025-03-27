@@ -31,7 +31,7 @@ chrome.runtime.onConnect.addListener(function(port) {
             id: json.id,
             name: json.forms[0].name,
             imageUrl: json.sprites.front_default,
-            level: Math.ceil(Math.random() * 100)
+            level: Math.ceil(Math.random() * 20)
           };
           console.log(currentPokemon);
           port.postMessage({ pokemonFound: currentPokemon });
@@ -47,6 +47,6 @@ chrome.runtime.onConnect.addListener(function(port) {
 function setAttributes(json){
     currentPokemon.name = json.forms[0].name;
     currentPokemon.imageUrl = json.sprites.front_default;
-    currentPokemon.level = Math.ceil(Math.random() * 100);
+    currentPokemon.level = Math.ceil(Math.random() * 20);
     currentPokemon.id = json.id;
 };

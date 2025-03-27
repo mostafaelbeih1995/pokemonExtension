@@ -32,9 +32,6 @@ port.onMessage.addListener((msg) => {
       // testDiv.innerHTML += `<p>${msg.question}</p>`;
       // port.postMessage({ request: "SEND_POKEMON" });
   } 
-  // else if (msg.request === "SEND_POKEMON") {
-      // testDiv.innerHTML += `<p>${msg.question}</p>`;
-      // port.postMessage({ answer: "Madame... Bovary" });
    else if (msg.pokemonFound) {
       console.log("NEW POKEMON FOUND !!!");
       console.log(msg.pokemonFound);
@@ -111,13 +108,6 @@ document.querySelectorAll(".starter-btn").forEach(btn => {
 
 catcheMeBtn.addEventListener('click', () => {
 
-    // let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
-    // const pokemon = {
-    //     name: currentPokemon.name,
-    //     imageUrl: currentPokemon.imageUrl,
-    //     level: currentPokemon.level,
-    //     id: currentPokemon.id
-    // }
     const pokemon = { ...currentPokemon };
     let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
     if(pokemonCollection.length < 6){
@@ -167,6 +157,10 @@ document.getElementById("cheatSubmit").addEventListener("click", () => {
     teamScreen.style.display = "block"
     localStorage.clear();
 
+  });
+
+  document.getElementById("respawn").addEventListener("click", ()=>{
+    port.postMessage({ request: "SEND_POKEMON" });
   });
     
 function renderComponent(team) {
@@ -219,6 +213,6 @@ function initCheatCodes() {
   function setAttributes(json){
     currentPokemon.name = json.forms[0].name
     currentPokemon.imageUrl = json.sprites.front_default
-    currentPokemon.level = Math.ceil(Math.random() * 100)
+    currentPokemon.level = Math.ceil(Math.random() * 20)
     currentPokemon.id = json.id
 };
