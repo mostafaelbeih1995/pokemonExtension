@@ -207,8 +207,8 @@ function initCheatCodes() {
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
         level: 99
       },
-      ponita: {
-        name: "Ponita",
+      ponyta: {
+        name: "Ponyta",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/77.png",
         level: 24
       },
