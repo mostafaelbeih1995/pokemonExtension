@@ -66,12 +66,16 @@
         }
         .pokedex-screen {
             flex-grow: 1;
+            background-color: lightslategrey;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             padding: 10px;
             overflow: hidden;
+        }
+        .pokedex-screen h4,h1,h2,h3{
+            color: white;
         }
         .search-bar {
             width: 100%;
@@ -212,7 +216,7 @@
     <!-- Pokédex Screen -->
     <div class="pokedex-screen text-align-left">
         <input type="text" class="search-bar" id="searchInput" placeholder="Search Pokémon...">
-        <h4>My Pokemons</h4>
+        <h3>My Pokemons</h2>
         <!-- Pokémon List -->
         <div class="pokemon-list" id="pokemonList">
             <!-- Pokémon items will be injected here dynamically -->
