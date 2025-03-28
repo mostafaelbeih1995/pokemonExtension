@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         myPokemonList.forEach((pokemon, index) => {
             console.log(myPokemonList);
             let pokemonItem = document.createElement("div");
-            // pokemonItem.className = "pokemon-item";
+            // pokemonItem.className = "pokemon-item-new";
             // pokemonItem.setAttribute("data-url", pokemon.image);
             // pokemonItem.setAttribute("data-tooltip", pokemon.name);
             pokemonItem.innerHTML = `
