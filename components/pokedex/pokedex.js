@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
             pokemonItem.innerHTML = `
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="${pokemon.name}">
                 <span>${capitalize(pokemon.name)}</span>
+                <span>Level: ${pokemon.level}</span>
                 <button class="delete-btn" data-index="${index}">✖</button>
             `;
             // pokemonItem.addEventListener("click", () => fetchPokemonDetails(pokemon.url));
