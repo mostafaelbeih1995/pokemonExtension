@@ -37,6 +37,7 @@ port.onMessage.addListener((msg) => {
       console.log(msg.pokemonFound);
       // testDiv.innerHTML += `<p>Pokemon Found</p>`;
       // setAttributes(msg.pokemonFound);
+      currentPokemon = {...msg.pokemonFound};
       console.log("CURRENT POKEMON NOW!!!");
       console.log(currentPokemon);
       pokeImg.src = msg.pokemonFound.imageUrl;
@@ -119,6 +120,7 @@ catcheMeBtn.addEventListener('click', () => {
         console.log(pokemonCollection.length);
         alert("🚫 Your team is full!\nYou can only have 6 Pokémon at a time. Click Restart to empty your team.");
     }
+    
     port.postMessage({ request: "SEND_POKEMON" });
     
 });
