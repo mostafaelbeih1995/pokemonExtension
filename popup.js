@@ -208,10 +208,11 @@ function initCheatCodes() {
         level: 99
       },
       ponyta: {
+        id: 77,
         name: "Ponyta",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/77.png",
         level: 24
-      },
+      }
     };
   
     localStorage.setItem("cheatCodes", JSON.stringify(cheatList));
