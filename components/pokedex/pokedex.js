@@ -17,10 +17,25 @@ document.addEventListener("DOMContentLoaded", function () {
             pokemonItem.innerHTML = `
                 <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="${pokemon.name}">
                 <span>${capitalize(pokemon.name)}</span>
+                <button class="delete-btn" data-index="${index}">✖</button>
             `;
             // pokemonItem.addEventListener("click", () => fetchPokemonDetails(pokemon.url));
             pokemonList.appendChild(pokemonItem);
         });
+
+        setTimeout(() => {
+            document.querySelectorAll(".delete-btn").forEach(button => {
+              button.addEventListener("click", (e) => {
+                e.stopPropagation(); // just in case there's a parent click
+                const index = parseInt(e.target.getAttribute("data-index"));
+                if (!isNaN(index)) {
+                  myPokemonList.splice(index, 1); // remove from array
+                  localStorage.setItem("pokemonCollection", JSON.stringify(myPokemonList));
+                  fetchPokemonList(page); // re-render
+                }
+              });
+            });
+          }, 0);
                 // updatePagination(data.previous, data.next);
     }
 
@@ -54,6 +69,17 @@ document.addEventListener("DOMContentLoaded", function () {
             item.style.display = name.includes(value) ? "flex" : "none";
         });
     });
+
+    // document.querySelectorAll(".delete-btn").forEach(button => {
+    //     button.addEventListener("click", (e) => {
+    //     console.log("Delete btn triggered");
+    //     const index = e.target.getAttribute("data-index");
+    //     myPokemonList.splice(index, 1); // remove from array
+
+    //     localStorage.setItem("pokemonCollection", JSON.stringify(collection));
+    //     fetchPokemonList(page); // re-render
+    //     });
+    //   });
 
     document.getElementById("closeDetails").addEventListener("click", function () {
         document.getElementById("pokemonDetails").style.display = "none";

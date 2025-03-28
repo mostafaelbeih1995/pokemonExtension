@@ -22,7 +22,7 @@ chrome.runtime.onConnect.addListener(function(port) {
 
         console.log("Send new pokemon request......."); 
 
-        const pokemonId = Math.ceil(Math.random()*151)
+        const pokemonId = Math.ceil(Math.random()*101)
         fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
         .then(response => response.json())
         .then(json => {

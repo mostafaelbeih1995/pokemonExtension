@@ -163,3 +163,37 @@ body {
     height: 100%;
     width: 90%;
 }
+
+.pokemon-item {
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+  
+  .pokemon-item img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: red;
+    border: none;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .delete-btn:hover {
+    background-color: darkred;
+  }

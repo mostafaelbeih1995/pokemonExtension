@@ -90,6 +90,7 @@ document.querySelectorAll(".starter-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const name = btn.dataset.name;
     const id = btn.dataset.id;
+    const index = btn.dataset.index;
     const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
     console.log(name, id); // ✅ test here
 
@@ -97,7 +98,8 @@ document.querySelectorAll(".starter-btn").forEach(btn => {
       id:id,
       name: name,
       imageUrl: image,
-      level: 5
+      level: 5,
+      index: 1
     };
     localStorage.setItem("pokemonCollection", JSON.stringify([starterPokemon]));
 
@@ -112,8 +114,9 @@ catcheMeBtn.addEventListener('click', () => {
     const pokemon = { ...currentPokemon };
     let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
     if(pokemonCollection.length < 6){
-        pokemonCollection.push(pokemon);
-        localStorage.setItem('pokemonCollection', JSON.stringify(pokemonCollection));
+        // pokemonCollection.push(pokemon);
+        savePokemomLocally(pokemon);
+        // localStorage.setItem('pokemonCollection', JSON.stringify(pokemonCollection));
         // title.innerText = `You caught a ${response.name}`
     } else{
         console.log("Maximum team is 6 pokemons... chose wisel !!");
@@ -140,9 +143,10 @@ document.getElementById("cheatSubmit").addEventListener("click", () => {
     const specialPokemon = cheatMap[cheatCode];
 
     const collection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
-    collection.push(specialPokemon);
+    // collection.push(specialPokemon);
+    savePokemomLocally(specialPokemon);
 
-    localStorage.setItem("pokemonCollection", JSON.stringify(collection));
+    // localStorage.setItem("pokemonCollection", JSON.stringify(collection));
     alert(`You unlocked ${specialPokemon.name}! 🥳`);
 
     // Clear input
@@ -164,6 +168,15 @@ document.getElementById("cheatSubmit").addEventListener("click", () => {
   document.getElementById("respawn").addEventListener("click", ()=>{
     port.postMessage({ request: "SEND_POKEMON" });
   });
+
+  function savePokemomLocally(pokemon){
+    const collection = JSON.parse(localStorage.getItem("pokemonCollection")) || [];
+    const newPokemon = {...pokemon};
+
+    newPokemon.index = collection.length + 1;
+    collection.push(newPokemon);
+    localStorage.setItem("pokemonCollection", JSON.stringify(collection));
+  }
     
 function renderComponent(team) {
     const container = document.getElementById("pokemon-title");
@@ -181,33 +194,40 @@ function initCheatCodes() {
     const cheatList = {
         gyarados: {
         id: 130, 
+        index: 1,
         name: "Gyarados",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png",
         level: 150
       },
       vulpix: {
+        index: 1,
+        id: 23,
         name: "Vulpix",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/37.png", 
         level: 150
       },
       abra: {
+        index: 1,
         id: 63,
         name: "Abra",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/63.png",
         level: 150
       },
       mew: {
+        index: 1,
         id: 151,
         name: "Mew",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
         level: 150
       },
       pikagod: {
+        index: 1,
         name: "Pikachu (God Mode)",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
         level: 99
       },
       ponyta: {
+        index: 1,
         id: 77,
         name: "Ponyta",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/77.png",
