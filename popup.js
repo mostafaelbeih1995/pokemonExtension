@@ -206,7 +206,12 @@ function initCheatCodes() {
         name: "Pikachu (God Mode)",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
         level: 99
-      }
+      },
+      ponita: {
+        name: "Ponita",
+        imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/77.png",
+        level: 24
+      },
     };
   
     localStorage.setItem("cheatCodes", JSON.stringify(cheatList));
