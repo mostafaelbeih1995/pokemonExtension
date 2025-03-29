@@ -6,15 +6,18 @@
     <title>Pokédex</title>
     <style>
         body {
+            margin: 0px;
             background-color: #f8f9fa;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            padding: 20px;
+            /* min-height: 100vh; */
+            /* height: 100vh; */
         }
         .pokedex-container {
-            /* width: 400px;
-            height: 400px; */
+            width: 500px;
+            min-height: 483px;
             background-color: white;
             border-radius: 10px;
             overflow: hidden;
@@ -206,7 +209,7 @@
     <!-- Left Side Menu -->
     <div class="menu">
         <a href="../../popup.html">
-            <button data-tooltip="Back">🔙</button>
+            <button data-tooltip="Back" id="backBtn">🔙</button>
         </a>
         <a href="../pokedex/pokedex.html">
             <button data-tooltip="Pokedex">🔍</button>
