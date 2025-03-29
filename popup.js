@@ -129,16 +129,35 @@ catcheMeBtn.addEventListener('click', () => {
 });
 
 document.getElementById("cheatSubmit").addEventListener("click", () => {
-    const input = document.getElementById("cheatCode");
-    const cheatCode = input.value.trim().toLowerCase();
-
-    const cheatMap = JSON.parse(localStorage.getItem("cheatCodes"));
-
-    if (!cheatMap || !cheatMap[cheatCode]) {
-        alert("Invalid cheat code 🕵️‍♂️");
-        input.value = "";
-        return;
-    }
+  const input = document.getElementById("cheatCode");
+  const cheatCode = input.value.trim().toLowerCase();
+  
+  console.log("Cheat entered:", cheatCode);
+  
+  // Grab cheat map safely
+  let cheatMap = localStorage.getItem("cheatCodes");
+  
+  if (!cheatMap) {
+    alert("No cheat codes loaded in the system.");
+    return;
+  }
+  
+  try {
+    cheatMap = JSON.parse(cheatMap);
+  } catch (err) {
+    alert("Corrupted cheat code data.");
+    console.error("Error parsing cheat codes:", err);
+    return;
+  }
+  
+  if (!cheatMap[cheatCode]) {
+    alert("Invalid cheat code 🕵️‍♂️");
+    input.value = "";
+    return;
+  }
+  
+  // ✅ Cheat code is valid
+  alert(`Cheat activated: ${cheatCode}`);
 
     const specialPokemon = cheatMap[cheatCode];
 
@@ -197,41 +216,40 @@ function initCheatCodes() {
         index: 1,
         name: "Gyarados",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png",
-        level: 150
+        level: 150,
+        golden: true
       },
       vulpix: {
         index: 1,
-        id: 23,
+        id: 37,
         name: "Vulpix",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/37.png", 
-        level: 150
+        level: 150,
+        golden: true
       },
       abra: {
         index: 1,
         id: 63,
         name: "Abra",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/63.png",
-        level: 150
+        level: 150,
+        golden: true
       },
       mew: {
         index: 1,
         id: 151,
         name: "Mew",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
-        level: 150
-      },
-      pikagod: {
-        index: 1,
-        name: "Pikachu (God Mode)",
-        imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-        level: 99
+        level: 150,
+        golden: true
       },
       ponyta: {
         index: 1,
         id: 77,
         name: "Ponyta",
         imageUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/77.png",
-        level: 24
+        level: 24,
+        golden: true
       }
     };
   

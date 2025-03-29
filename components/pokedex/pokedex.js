@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(myPokemonList);
             let pokemonItem = document.createElement("div");
             pokemonItem.className = "pokemon-item-new";
+            if(pokemon.golden){
+                pokemonItem.style.backgroundColor = "#f5d76e";
+            }
             // pokemonItem.setAttribute("data-url", pokemon.image);
             // pokemonItem.setAttribute("data-tooltip", pokemon.name);
             pokemonItem.innerHTML = `
